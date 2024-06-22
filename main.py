@@ -50,7 +50,8 @@ Cogs_packages = [
 # The cogs in the 'logs' folder are loaded here (it's a subfolder of 'cogs' folder)
 Cogs_logs = [
     'moderation-logs',
-    'voice-logs'
+    'voice-logs',
+    'roles-logs'
 ]
 
 for cog in Cogs_main:

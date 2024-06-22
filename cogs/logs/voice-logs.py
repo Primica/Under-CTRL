@@ -88,34 +88,6 @@ class VoiceLogs(commands.Cog):
                 embed.set_thumbnail(url=member.avatar.url)
                 await channel.send(embed=embed)
 
-    # When a member is moved to a different voice channel
-    @commands.Cog.listener("on_voice_state_update")
-    async def voice_move(self, member, before, after):
-        if before.channel is not None and after.channel is not None and before.channel != after.channel:
-            channel = discord.utils.get(member.guild.text_channels, name="voice-logs")
-            if channel:
-                embed = discord.Embed(
-                    title="Member Moved Voice Channel",
-                    description=f"{member.mention} has been moved from {before.channel.mention} to {after.channel.mention}.",
-                    color=discord.Color.blurple()
-                )
-                embed.set_thumbnail(url=member.avatar.url)
-                await channel.send(embed=embed)
-
-    # When a member is disconnected from a voice channel
-    @commands.Cog.listener("on_voice_state_update")
-    async def voice_disconnect(self, member, before, after):
-        if before.channel is not None and after.channel is None:
-            channel = discord.utils.get(member.guild.text_channels, name="voice-logs")
-            if channel:
-                embed = discord.Embed(
-                    title="Member Disconnected",
-                    description=f"{member.mention} has been disconnected from {before.channel.mention}.",
-                    color=discord.Color.red()
-                )
-                embed.set_thumbnail(url=member.avatar.url)
-                await channel.send(embed=embed)
-
 
 def setup(bot):
     bot.add_cog(VoiceLogs(bot))

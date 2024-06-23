@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import json
 from cogs.packages.panel import DecisionView, CandidatureView
+from cogs.candidatures import CandidatureViewDiscord
 
 # Loading the config file
 with open('config.json') as f:
@@ -18,6 +19,22 @@ async def on_ready():
     print(f'Bot ID: {bot.user.id}')
     bot.add_view(DecisionView())
     bot.add_view(CandidatureView())
+    bot.add_view(CandidatureViewDiscord())
+
+
+@bot.event
+async def on_member_join(member):
+    # Get channel by ID
+    channel = member.guild.get_channel(1211085560286810123)
+    embed = discord.Embed(
+        title=f'Bienvenue {member.name} à Breaking Hardware !',
+        description=f'Tu es le {len(member.guild.members)}ème membre !\n\n '
+                    f'Pense à jeter un oeil au réglement, si tu souhaite rentrer dans le staff tu peux faire une '
+                    f'candidature !',
+        color=discord.Color.blurple()
+    )
+    embed.set_thumbnail(url=member.avatar.url)
+    await channel.send(embed=embed)
 
 
 @bot.slash_command(name='report', description='Report a user')
@@ -38,7 +55,8 @@ Cogs_main = [
     'moderation',
     'admin',
     'automod',
-    'gestion'
+    'gestion',
+    'candidatures-discord'
 ]
 
 # The cogs in the 'packages' folder are loaded here (it's a subfolder of 'cogs' folder)

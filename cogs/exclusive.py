@@ -39,7 +39,7 @@ class Exclusive(commands.Cog):
         await ctx.message.delete()
         webhook = await ctx.channel.webhooks()
         if webhook:
-            await webhook[0].send(content=message, username=ctx.author.name, avatar_url=ctx.author.avatar.url)
+            await webhook[0].send(content=message, username=self.bot.user.name, avatar_url=self.bot.user.avatar.url)
         else:
             await ctx.send('No webhook found', delete_after=5)
 

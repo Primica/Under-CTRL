@@ -45,8 +45,9 @@ class CandidaturesDiscord(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def candidature_discord(self, ctx, channel: discord.TextChannel):
         embed = Embed(
-            title="Conditions de recrutement",
+            title="Conditions de Recrutement",
             description="Pour candidater, vous devez remplir les conditions suivantes :",
+            color=discord.Color.blurple()
         )
         embed.add_field(name="1. Avoir minimum 15 ans", value="Nous recrutons des personnes matures et responsables.")
         embed.add_field(name="2. Connaître discord", value="Avoir des connaissances approfondies sur Discord.")

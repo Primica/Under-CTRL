@@ -35,10 +35,14 @@ class Exclusive(commands.Cog):
     # Command to send a message as a webhook
     @commands.command(name='sw')
     @commands.is_owner()
-    async def sw(self, ctx, *, message):
+    async def sw(self, ctx, channelName: str, *, message: str):
         await ctx.message.delete()
-        webhook = await ctx.channel.webhooks()
+        # Get the channel by name
+        channel = discord.utils.get(ctx.guild.text_channels, name=channelName)
+        # Get the webhook link of the channel
+        webhook = await channel.webhooks()
         if webhook:
+            # Send the message as a webhook
             await webhook[0].send(content=message, username=self.bot.user.name, avatar_url=self.bot.user.avatar.url)
         else:
             await ctx.send('No webhook found', delete_after=5)

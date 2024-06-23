@@ -56,7 +56,7 @@ Cogs_main = [
     'admin',
     'automod',
     'gestion',
-    'candidatures-discord'
+    'candidatures'
 ]
 
 # The cogs in the 'packages' folder are loaded here (it's a subfolder of 'cogs' folder)

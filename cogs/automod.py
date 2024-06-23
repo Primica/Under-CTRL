@@ -15,6 +15,14 @@ class Automod(commands.Cog):
 
     @commands.Cog.listener("on_message")
     async def anti_link(self, message):
+
+        role = discord.utils.get(message.guild.roles, name='@sudo')
+        if role in message.author.roles:
+            return
+
+        if message.author.guild_permissions.administrator:
+            return
+
         if message.author.bot:
             return
         if 'https://' in message.content or 'discord.gg' in message.content:
@@ -23,6 +31,14 @@ class Automod(commands.Cog):
 
     @commands.Cog.listener("on_message")
     async def anti_mention(self, message):
+
+        role = discord.utils.get(message.guild.roles, name='@sudo')
+        if role in message.author.roles:
+            return
+
+        if message.author.guild_permissions.administrator:
+            return
+
         if message.author.bot:
             return
         # If the messages contain more or equal to 3 mentions, even if it's the 3 same mentions delete the message
@@ -34,6 +50,15 @@ class Automod(commands.Cog):
 
     @commands.Cog.listener("on_message")
     async def anti_spam(self, message):
+
+        # If the author has the role '@sudo' return
+        role = discord.utils.get(message.guild.roles, name='@sudo')
+        if role in message.author.roles:
+            return
+
+        if message.author.guild_permissions.administrator:
+            return
+
         if message.author.bot:
             return
         now = datetime.utcnow()

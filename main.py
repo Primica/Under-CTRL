@@ -71,8 +71,7 @@ Cogs_packages = [
 Cogs_logs = [
     'moderation-logs',
     'voice-logs',
-    'roles-logs',
-    'messages-logs'
+    'roles-logs'
 ]
 
 for cog in Cogs_main:

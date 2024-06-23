@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import json
 from cogs.packages.panel import DecisionView, CandidatureView
-from cogs.candidatures import CandidatureViewDiscord
+from cogs.candidatures import CandidatureViewDiscord, DiscordDecisionView
 
 # Loading the config file
 with open('config.json') as f:
@@ -20,6 +20,7 @@ async def on_ready():
     bot.add_view(DecisionView())
     bot.add_view(CandidatureView())
     bot.add_view(CandidatureViewDiscord())
+    bot.add_view(DiscordDecisionView())
 
 
 @bot.event

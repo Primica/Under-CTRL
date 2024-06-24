@@ -35,7 +35,7 @@ async def on_member_join(member):
         color=discord.Color.blurple()
     )
     embed.set_thumbnail(url=member.avatar.url)
-    await channel.send(embed=embed)
+    await channel.send(embed=embed, delete_after=60 * 3)
 
 
 @bot.slash_command(name='report', description='Report a user')

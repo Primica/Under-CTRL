@@ -30,7 +30,7 @@ async def on_member_join(member):
     embed = discord.Embed(
         title=f'Bienvenue {member.name} à Breaking Hardware !',
         description=f'Tu es le {len(member.guild.members)}ème membre !\n\n '
-                    f'Pense à jeter un oeil au réglement, si tu souhaite rentrer dans le staff tu peux faire une '
+                    f'Pense à jeter un oeil au règlement, si tu souhaite rentrer dans le staff tu peux faire une '
                     f'candidature !',
         color=discord.Color.blurple()
     )

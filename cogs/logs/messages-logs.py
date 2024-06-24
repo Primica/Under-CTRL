@@ -8,6 +8,9 @@ class MessageLogs(commands.Cog):
 
     @commands.Cog.listener("on_message_delete")
     async def del_msg(self, message):
+        if message.author.bot:
+            return
+
         channel = discord.utils.get(message.guild.text_channels, name="messages-logs")
         if channel:
             embed = discord.Embed(
@@ -20,6 +23,9 @@ class MessageLogs(commands.Cog):
 
     @commands.Cog.listener("on_message_edit")
     async def edit_msg(self, before, after):
+        if before.author.bot:
+            return
+
         channel = discord.utils.get(before.guild.text_channels, name="messages-logs")
         if channel:
             embed = discord.Embed(

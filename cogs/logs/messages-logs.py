@@ -21,20 +21,21 @@ class MessageLogs(commands.Cog):
             embed.set_thumbnail(url=message.author.avatar.url)
             await channel.send(embed=embed)
 
-    @commands.Cog.listener("on_message_edit")
+    @commands.Cog.listener("on_message")
     async def edit_msg(self, before, after):
         if before.author.bot:
             return
 
         channel = discord.utils.get(before.guild.text_channels, name="messages-logs")
         if channel:
-            embed = discord.Embed(
-                title="Message Edited",
-                description=f"**Author:** {before.author.mention}\n**Channel:** {before.channel.mention}\n**Before:** {before.content}\n**After:** {after.content}",
-                color=discord.Color.orange()
-            )
-            embed.set_thumbnail(url=before.author.avatar.url)
-            await channel.send(embed=embed)
+            if before.content != after.content:
+                embed = discord.Embed(
+                    title="Message Edited",
+                    description=f"**Author:** {before.author.mention}\n**Channel:** {before.channel.mention}\n**Before:** {before.content}\n**After:** {after.content}",
+                    color=discord.Color.orange()
+                )
+                embed.set_thumbnail(url=before.author.avatar.url)
+                await channel.send(embed=embed)
 
 
 def setup(bot):

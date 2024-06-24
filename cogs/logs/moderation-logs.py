@@ -32,14 +32,14 @@ class ModerationLogs(commands.Cog):
             embed.set_thumbnail(url=user.avatar.url)
             await channel.send(embed=embed)
 
-    # When a member is kicked
+    # When a member leaves the server
     @commands.Cog.listener("on_member_remove")
     async def on_member_remove(self, member):
         channel = discord.utils.get(member.guild.text_channels, name="moderation-logs")
         if channel:
             embed = discord.Embed(
-                title="Member Kicked",
-                description=f"{member.mention} has been kicked.",
+                title="Member Left",
+                description=f"{member.mention} has left the server.",
                 color=discord.Color.red()
             )
             embed.set_thumbnail(url=member.avatar.url)

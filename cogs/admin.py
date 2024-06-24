@@ -89,6 +89,20 @@ class Admin(commands.Cog):
             embed.add_field(name=user.name, value=user.id)
         await ctx.respond(embed=embed, ephemeral=True)
 
+    @slash_command(name='lock', description='Lock a channel')
+    @commands.has_permissions(administrator=True)
+    async def lock(self, ctx, *, channel: discord.TextChannel = None):
+        channel = channel or ctx.channel
+        await channel.set_permissions(ctx.guild.default_role, send_messages=False)
+        await ctx.respond(f'{channel.mention} has been locked.', delete_after=5)
+
+    @slash_command(name='unlock', description='Unlock a channel')
+    @commands.has_permissions(administrator=True)
+    async def unlock(self, ctx, *, channel: discord.TextChannel = None):
+        channel = channel or ctx.channel
+        await channel.set_permissions(ctx.guild.default_role, send_messages=True)
+        await ctx.respond(f'{channel.mention} has been unlocked.', delete_after=5)
+
 
 def setup(bot):
     bot.add_cog(Admin(bot))
